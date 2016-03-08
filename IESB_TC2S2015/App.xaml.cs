@@ -16,6 +16,7 @@ namespace IESB_TC2S2015
     {
         public static Frame RootFrame;
 
+        public static string SQLitePath =            Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "database.sqlite");
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -27,6 +28,12 @@ namespace IESB_TC2S2015
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            using (SQLite.Net.SQLiteConnection connection =
+                new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), SQLitePath))
+            {
+                connection.CreateTable<Model.Contato>();
+            }
         }
 
         /// <summary>

@@ -19,5 +19,6 @@
         <ListView Grid.Row="1" Name="myListView"
                   Style="{StaticResource DadosContato}"/>
 
+
     </Grid>
 </Page>

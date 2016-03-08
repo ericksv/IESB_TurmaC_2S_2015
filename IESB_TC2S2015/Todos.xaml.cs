@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using SQLite.Net;
+using SQLite.Net.Platform.WinRT;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -20,8 +23,22 @@ namespace IESB_TC2S2015
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter != null && e.Parameter is IEnumerable<Model.Contato>)
-                myListView.ItemsSource = e.Parameter as IEnumerable<Model.Contato>;
+            using (SQLiteConnection connection =
+                new SQLiteConnection(new SQLitePlatformWinRT(), App.SQLitePath))
+            {
+                myListView.ItemsSource =
+                    new ObservableCollection<Model.Contato>(connection.Table<Model.Contato>());
+            }
+        }
+
+        private void AppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Contato));
+        }
+
+        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Contato), myListView.SelectedItem);
         }
     }
 }

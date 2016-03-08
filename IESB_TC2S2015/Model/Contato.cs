@@ -1,24 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IESB_TC2S2015.Model
+﻿namespace IESB_TC2S2015.Model
 {
+    [SQLite.Net.Attributes.Table(nameof(Contato))]
     public class Contato
     {
+        [SQLite.Net.Attributes.Column(nameof(ID)),
+            SQLite.Net.Attributes.PrimaryKey,
+            SQLite.Net.Attributes.AutoIncrement]
+        public int? ID { get; set; }
+
+        [SQLite.Net.Attributes.MaxLength(100),
+            SQLite.Net.Attributes.NotNull]
         public string Nome { get; set; }
+
+        [SQLite.Net.Attributes.MaxLength(100)]
         public string Email { get; set; }
+
+        [SQLite.Net.Attributes.MaxLength(40)]
         public string Telefone { get; set; }
         public bool IsFavorito { get; set; }
 
-        public Contato(string Nome, string Email, string Telefone = "", bool IsFavorito = false)
+        public Contato() { }
+
+        public Contato(string nome)
+            : this()
         {
-            this.Nome = Nome;
-            this.Email = Email;
-            this.Telefone = Telefone;
-            this.IsFavorito = IsFavorito;
+            this.Nome = nome;
+        }
+        public Contato(string nome, string email, string telefone = "", bool isFavorito = false)
+            : this(nome)
+        {
+            this.Nome = nome;
+            this.Email = email;
+            this.Telefone = telefone;
+            this.IsFavorito = isFavorito;
         }
     }
 }

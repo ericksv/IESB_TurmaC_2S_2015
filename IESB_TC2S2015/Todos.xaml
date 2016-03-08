@@ -17,7 +17,47 @@
         <TextBlock Grid.Row="0" Text="Todos" FontSize="36" Margin="12"/>
 
         <ListView Grid.Row="1" Name="myListView"
-                  Style="{StaticResource DadosContato}"/>
+                  Style="{StaticResource DadosContato}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,12,0,12" BorderBrush="LightGray"
+                          BorderThickness="0,0,0,1"
+                          Tapped="Grid_Tapped">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                Text="Nome"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1"
+                                Text="{Binding Nome}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                Text="Email"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1"
+                                Text="{Binding Email}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                Text="Telefone"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1"
+                                Text="{Binding Telefone}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="AddFriend" Click="AppBarButton_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

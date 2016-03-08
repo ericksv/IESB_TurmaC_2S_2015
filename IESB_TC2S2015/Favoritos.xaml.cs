@@ -15,13 +15,5 @@ namespace IESB_TC2S2015
         {
             this.InitializeComponent();
         }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            if (e.Parameter != null && e.Parameter is IEnumerable<Model.Contato>)
-                myListView.ItemsSource = e.Parameter as IEnumerable<Model.Contato>;
-        }
     }
 }
