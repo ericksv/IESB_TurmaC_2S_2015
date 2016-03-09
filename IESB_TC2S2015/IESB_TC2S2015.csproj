@@ -105,26 +105,28 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Contato.xaml.cs">
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="View\Contato.xaml.cs">
       <DependentUpon>Contato.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Emails.xaml.cs">
+    <Compile Include="View\Emails.xaml.cs">
       <DependentUpon>Emails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Favoritos.xaml.cs">
+    <Compile Include="View\Favoritos.xaml.cs">
       <DependentUpon>Favoritos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HamburgerMenu.xaml.cs">
+    <Compile Include="View\HamburgerMenu.xaml.cs">
       <DependentUpon>HamburgerMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Contato.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Telefones.xaml.cs">
+    <Compile Include="View\Telefones.xaml.cs">
       <DependentUpon>Telefones.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Todos.xaml.cs">
+    <Compile Include="View\Todos.xaml.cs">
       <DependentUpon>Todos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ContatosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -147,19 +149,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Contato.xaml">
+    <Page Include="View\Contato.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Emails.xaml">
+    <Page Include="View\Emails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Favoritos.xaml">
+    <Page Include="View\Favoritos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HamburgerMenu.xaml">
+    <Page Include="View\HamburgerMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,11 +170,11 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Telefones.xaml">
+    <Page Include="View\Telefones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Todos.xaml">
+    <Page Include="View\Todos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
