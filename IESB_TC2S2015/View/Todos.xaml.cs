@@ -1,13 +1,8 @@
-﻿using SQLite.Net;
-using SQLite.Net.Platform.WinRT;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
+﻿using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace IESB_TC2S2015
+namespace IESB_TC2S2015.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

@@ -1,4 +1,5 @@
 ﻿using IESB_TC2S2015.Commands;
+using IESB_TC2S2015.Model;
 using SQLite.Net;
 using SQLite.Net.Platform.WinRT;
 using System.Collections.ObjectModel;
@@ -9,65 +10,85 @@ namespace IESB_TC2S2015.ViewModel
 {
     public class ContatosViewModel
     {
-        public Frame Frame => App.RootFrame;
-        public ObservableCollection<Model.Contato> ListaDeContatos { get; set; }
+        Frame frame => App.RootFrame;
+
+        public ObservableCollection<Model.Contato>
+            Lista
+        { get; set; }
         public Model.Contato ContatoSelecionado { get; set; }
 
         public ContatosViewModel()
         {
-            using (SQLiteConnection connection = new SQLiteConnection(new SQLitePlatformWinRT(),
+            using (SQLiteConnection dbConnection =
+                new SQLiteConnection(new SQLitePlatformWinRT(),
                 App.SQLitePath))
             {
-                ListaDeContatos =
-                    new ObservableCollection<Model.Contato>(connection.Table<Model.Contato>());
+                Lista =
+                    new ObservableCollection<Model.Contato>
+                    (
+                        dbConnection.Table<Model.Contato>()
+                    );
             }
 
-            this.AdicionarCommand = new Command(Adicionar);
-            this.AlterarCommand = new Command(Alterar);
-            this.ExcluirCommand = new Command<Model.Contato>(Excluir);
-            this.SalvarCommand = new Command<Model.Contato>(Salvar);
-            this.CancelarCommand = new Command(Cancelar);
+            this.IncluirCommand =
+                new Commands.Command(Incluir);
+            this.SalvarCommand =
+                new Commands.Command(Salvar);
+            this.EditarCommand =
+                new Commands.Command(Editar);
+            this.CancelarCommand =
+                new Commands.Command(Cancelar);
+            this.DeletarCommand =
+                new Commands.Command(Deletar);
         }
 
-        public Command AdicionarCommand { get; set; }
-        public void Adicionar()
+        public ICommand IncluirCommand { get; set; }
+        public void Incluir()
         {
             this.ContatoSelecionado = new Model.Contato();
-            Frame.Navigate(typeof(Contato), this);
+            frame.Navigate(typeof(View.Contato),
+                this);
         }
 
-        public ICommand SalvarCommand { get; set; }
-        public void Salvar(Model.Contato contato)
+        public ICommand EditarCommand { get; set; }
+        public void Editar()
         {
-            using (SQLiteConnection connection =
-                new SQLiteConnection(new SQLitePlatformWinRT(), App.SQLitePath))
-            {
-                connection.InsertOrReplace(contato);
-            }
-            Frame.GoBack();
-        }
-
-        public ICommand AlterarCommand { get; set; }
-        public void Alterar()
-        {
-            Frame.Navigate(typeof(Contato), this);
-        }
-
-        public ICommand ExcluirCommand { get; set; }
-        public void Excluir(Model.Contato contato)
-        {
-            using (SQLiteConnection connection = new SQLiteConnection(new SQLitePlatformWinRT(),
-                App.SQLitePath))
-            {
-                connection.Delete(contato);
-            }
-            Frame.GoBack();
+            frame.Navigate(typeof(View.Contato),
+                this);
         }
 
         public ICommand CancelarCommand { get; set; }
         public void Cancelar()
         {
-            Frame.GoBack();
+            frame.GoBack();
+        }
+
+        public ICommand SalvarCommand { get; set; }
+        public void Salvar()
+        {
+            using (SQLiteConnection dbConnection =
+                new SQLiteConnection(new SQLitePlatformWinRT(),
+                App.SQLitePath))
+            {
+                dbConnection
+                    .InsertOrReplace(this.ContatoSelecionado);
+            }
+
+            frame.GoBack();
+        }
+
+        public ICommand DeletarCommand { get; set; }
+        public void Deletar()
+        {
+            using (SQLiteConnection dbConnection =
+                new SQLiteConnection(new SQLitePlatformWinRT(),
+                App.SQLitePath))
+            {
+                dbConnection
+                    .Delete(this.ContatoSelecionado);
+            }
+
+            frame.GoBack();
         }
     }
 }

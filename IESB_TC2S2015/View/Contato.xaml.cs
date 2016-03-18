@@ -1,12 +1,21 @@
-﻿using IESB_TC2S2015.ViewModel;
-using Windows.System.Profile;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace IESB_TC2S2015
+namespace IESB_TC2S2015.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -24,20 +33,21 @@ namespace IESB_TC2S2015
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter != null && e.Parameter is ContatosViewModel)
-                this.DataContext = e.Parameter as ContatosViewModel;
+            if (e.Parameter != null && e.Parameter is ViewModel.ContatosViewModel)
+            {
+                this.DataContext =
+                    e.Parameter as ViewModel.ContatosViewModel;
+            }
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if ("Windows.Mobile".Equals(AnalyticsInfo.VersionInfo.DeviceFamily))
-                this.BottomAppBar.Visibility = Visibility.Collapsed;
+            CommandBar.Visibility = Visibility.Collapsed;
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if ("Windows.Mobile".Equals(AnalyticsInfo.VersionInfo.DeviceFamily))
-                this.BottomAppBar.Visibility = Visibility.Visible;
+            CommandBar.Visibility = Visibility.Visible;
         }
     }
 }

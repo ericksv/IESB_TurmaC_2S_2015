@@ -16,7 +16,11 @@ namespace IESB_TC2S2015
     {
         public static Frame RootFrame;
 
-        public static string SQLitePath =            Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "database.sqlite");
+        public static string SQLitePath =
+            Path.Combine(Windows.Storage
+                .ApplicationData.Current
+                .LocalFolder.Path, "database.sqlite");
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -30,7 +34,10 @@ namespace IESB_TC2S2015
             this.Suspending += OnSuspending;
 
             using (SQLite.Net.SQLiteConnection connection =
-                new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), SQLitePath))
+                new SQLite.Net
+                .SQLiteConnection(new SQLite.Net
+                .Platform.WinRT.SQLitePlatformWinRT(),
+                SQLitePath))
             {
                 connection.CreateTable<Model.Contato>();
             }
@@ -56,7 +63,7 @@ namespace IESB_TC2S2015
                 }
 
                 // Place the frame in the current Window
-                Window.Current.Content = new HamburgerMenu();
+                Window.Current.Content = new View.HamburgerMenu();
             }
 
             if (RootFrame.Content == null)
@@ -65,7 +72,7 @@ namespace IESB_TC2S2015
                 // configuring the new page by passing required information as a navigation
                 // parameter
 
-                RootFrame.Navigate(typeof(Todos), e.Arguments);
+                RootFrame.Navigate(typeof(View.Todos), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();
