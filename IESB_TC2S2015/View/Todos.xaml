@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="IESB_TC2S2015.View.Todos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:IESB_TC2S2015.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="using:IESB_TC2S2015.ViewModel"
+    xmlns:models="using:IESB_TC2S2015.Model"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewmodel:ContatosViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Todos" FontSize="36" Margin="12"/>
+
+        <ListView Grid.Row="1"
+                  ItemsSource="{Binding Lista}"
+                  SelectedItem="{Binding ContatoSelecionado, Mode=TwoWay}"
+                  Style="{StaticResource DadosContato}">
+
+        </ListView>
+
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="AddFriend"
+                          Command="{Binding IncluirCommand}"/>
+            <AppBarButton Icon="Edit"
+                          Command="{Binding EditarCommand}"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
